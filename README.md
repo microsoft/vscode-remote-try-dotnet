@@ -20,7 +20,7 @@ Some things to try:
    2. Add a breakpoint (e.g. on line 21).
    3. Press <kbd>F5</kbd> to launch the app in the container.
    4. Once the breakpoint is hit, try hovering over variables, examining locals, and more.
-   5. Open a local browser and go to `http://localhost:9000` and note you can connect to the server in the container.
+   5. Contine, then open a local browser and go to `http://localhost:9000` and note you can connect to the server in the container.
 5. **Forward another port:**
    1. Stop debugging and remove the breakpoint.
    2. Open `Program.cs`
