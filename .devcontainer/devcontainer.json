@@ -1,0 +1,8 @@
+{
+	"name": ".NET Core Sample",
+	"dockerFile": "Dockerfile",
+	"appPort": 9000,
+	"extensions": [
+		"ms-vscode.csharp"
+	]
+}
