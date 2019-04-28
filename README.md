@@ -26,7 +26,7 @@ Some things to try:
    - Open `Program.cs`
    - Change the server port to 5000. (`.UseUrls("http://0.0.0.0:5000")`)
    - Press <kbd>F5</kbd> to launch the app in the container.
-   - Press <kbd>F1</kbd> and run the **Remote-Containers: Forward Port...** command.
+   - Press <kbd>F1</kbd> and run the **Remote-Containers: Forward Port from Container...** command.
    - Select port 5000.
    - Click "Open Browser" in the notification that appears to access the web app on this new port.
 
