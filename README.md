@@ -23,11 +23,11 @@ Some things to try:
 
 1. **Restore Packages:** When notified by the C# extension to install packages, click Restore to trigger the process from inside the container!
 2. **Edit:**
-   - Open `Progam.cs`
+   - Open `Program.cs`
    - Try adding some code and check out the language features.
 3. **Terminal:** Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>\`</kbd> and type `dotnet --version` and other Linux commands from the terminal window.
 4. **Build, Run, and Debug:**
-   - Open `Progam.cs`
+   - Open `Program.cs`
    - Add a breakpoint (e.g. on line 21).
    - Press <kbd>F5</kbd> to launch the app in the container.
    - Once the breakpoint is hit, try hovering over variables, examining locals, and more.
