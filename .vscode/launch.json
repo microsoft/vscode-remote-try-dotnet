@@ -8,9 +8,17 @@
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
-            "program": "dotnet",
-            "args": ["run"],
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.1/aspnetapp.dll",
+            "args": [],
             "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "launchBrowser": {
+                "enabled": false
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
         }
     ]
 }
