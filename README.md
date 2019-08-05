@@ -10,7 +10,7 @@ Follow these steps to open this sample in a container:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started).
 
-2. **Linux users:** Update `.devcontainer/Dockerfile` with your user UID/GID if not 1000 to avoid creating files as root.
+2. **Linux users:** Update `USER_UID` and `USER_GID` in `.devcontainer/Dockerfile` with your user UID/GID if not 1000 to avoid creating files as root.
 
 3. If you're not yet in a development container:
    - Clone this repository.
@@ -21,7 +21,7 @@ Follow these steps to open this sample in a container:
 
 One you have this sample opened in a container, you'll be able to work with it like you would locally.
 
-> **Note:** This container runs as a non-root user with sudo access by default. Comment out `"runArgs": ["-u", "vscode"]` in `devcontainer.json` if you'd prefer to run as root.
+> **Note:** This container runs as a non-root user with sudo access by default. Comment out `"runArgs": ["-u", "vscode"]` in `.devcontainer/devcontainer.json` if you'd prefer to run as root.
 
 Some things to try:
 
