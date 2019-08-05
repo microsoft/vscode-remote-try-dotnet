@@ -5,6 +5,7 @@
 	"extensions": [
 		"ms-vscode.csharp"
 	],
-	// Comment out the next line to run as root instead. Linux users, update Dockerfile with your user's UID/GID.
+	// Comment out the next line to run as root instead. Linux users, 
+	// update Dockerfile with your user's UID/GID if not 1000.
 	"runArgs": [ "-u", "vscode" ]
 }
