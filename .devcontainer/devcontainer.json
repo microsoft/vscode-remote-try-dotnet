@@ -1,11 +1,24 @@
 {
 	"name": ".NET Core Sample",
 	"dockerFile": "Dockerfile",
-	"appPort": 9000,
-	"extensions": [
-		"ms-vscode.csharp"
-	],
+
+	// Specifies ports to publish
+	"appPort": [9000],
+
 	// Comment out the next line to run as root instead. Linux users, 
 	// update Dockerfile with your user's UID/GID if not 1000.
-	"runArgs": [ "-u", "vscode" ]
+	"runArgs": [ "-u", "vscode" ],
+
+	// Use 'settings' to set *default* container specific settings.json values on container create. 
+	// You can edit these settings after create using File > Preferences > Settings > Remote.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash"
+	},
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "dotnet restore",
+
+	"extensions": [
+		"ms-vscode.csharp"
+	]
 }
