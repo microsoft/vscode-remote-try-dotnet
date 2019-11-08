@@ -23,7 +23,7 @@
 		//  * Windows PowerShell:
 		//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere" 
 		//  * macOS/Linux terminal:
-		//     dotnet dev-certs https --trust && dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+		//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
 		//
 		// Next, after running the command above, uncomment the lines below and open / rebuild the container.
 		//

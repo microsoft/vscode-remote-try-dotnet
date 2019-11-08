@@ -47,9 +47,9 @@ Some things to try:
    - Open `launch.json`
    - Add `"ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:9000",` to the `"env"` property array.
 
-        > **Note:** By default, ASP.NET Core only listens to localhost. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. This means that ASP.NET Core thinks that localhost is inside the container, so the app needs to listen to `*` or `0.0.0.0` to be accessible. 
+        > **Note:** By default, ASP.NET Core only listens to localhost. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. Unfortunately, means that ASP.NET Core only listens to localhost is inside the container itself. It needs to listen to `*` or `0.0.0.0` for the application to be accessible externally.
         >
-        > This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/devcontainer.json`. Using an environment variable to override this setting in the container only allows you to leave the config as-is for use when running locally.
+        > This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/devcontainer.json`. Using an environment variable to override this setting in the container only, which allows you to leave your actual application config as-is for use when running locally.
 
    - Press <kbd>F5</kbd> to launch the app in the container.
    - Press <kbd>F1</kbd> and run the **Remote-Containers: Forward Port from Container...** command.
