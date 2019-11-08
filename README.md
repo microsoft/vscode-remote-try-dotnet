@@ -12,7 +12,11 @@ Follow these steps to open this sample in a container:
 
 2. **Linux users:** Update `USER_UID` and `USER_GID` in `.devcontainer/Dockerfile` with your user UID/GID if not 1000 to avoid creating files as root.
 
-3. If you're not yet in a development container:
+3. If you want to enable **HTTPS**, see [enabling HTTPS](#enabling-https) to reuse your local development cert in the container.
+
+4. This container also runs as a non-root user with sudo access by default. Comment out `"-u", "vscode"` in the `runArgs` property array in `.devcontainer/devcontainer.json` if you'd prefer to run as root.
+
+5. If you're not yet in a development container:
    - Clone this repository.
    - Press <kbd>F1</kbd> and select the **Remote-Containers: Open Folder in Container...** command.
    - Select the cloned copy of this folder, wait for the container to start, and try things out!
@@ -20,8 +24,6 @@ Follow these steps to open this sample in a container:
 ## Things to try
 
 One you have this sample opened in a container, you'll be able to work with it like you would locally.
-
-> **Note:** This container runs as a non-root user with sudo access by default. Comment out `"runArgs": ["-u", "vscode"]` in `.devcontainer/devcontainer.json` if you'd prefer to run as root.
 
 Some things to try:
 
@@ -35,15 +37,51 @@ Some things to try:
    - Add a breakpoint (e.g. on line 21).
    - Press <kbd>F5</kbd> to launch the app in the container.
    - Once the breakpoint is hit, try hovering over variables, examining locals, and more.
-   - Continue, then open a local browser and go to `http://localhost:9000` and note you can connect to the server in the container.
+   - Continue, then open a local browser and go to `http://localhost:5000` and note you can connect to the server in the container.
 5. **Forward another port:**
    - Stop debugging and remove the breakpoint.
-   - Open `Program.cs`
-   - Change the server port to 5000. (`.UseUrls("http://0.0.0.0:5000")`)
+   - Open `launch.json`
+   - Add `"ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:9000",` to the `"env"` property array.
+
+        > **Note:** By default, ASP.NET Core only listens to localhost. The challenge is that ASP.NET Core thinks that localhost is inside the container. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. Therefore, listening to `*` or `0.0.0.0` is required for the `appPort` property to function. 
+        >
+        > This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/devcontainer.json` to override the application config. Using an environment variable that is only present in the container allows you to keep the application config using `localhost` when running locally - which is why we'll override the variable here.
+
    - Press <kbd>F5</kbd> to launch the app in the container.
    - Press <kbd>F1</kbd> and run the **Remote-Containers: Forward Port from Container...** command.
-   - Select port 5000.
+   - Select port 9000.
    - Click "Open Browser" in the notification that appears to access the web app on this new port.
+
+### Enabling HTTPS
+
+To enable HTTPS for this sample, you can mount an exported copy of your local dev certificate. First, export it using the following command:
+
+**Windows PowerShell**
+
+```powershell
+dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+```
+
+**macOS/Linux terminal**
+
+```powershell
+dotnet dev-certs https --trust && dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+```
+
+Next, update the `runArgs` array in `.devcontainer/devcontainer.json` as follows:
+
+```json
+"runArgs": [
+    "-u", "vscode",
+    "-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000",
+    "-e", "ASPNETCORE_Kestrel__Endpoints__Https__Url=https://*:5001",
+    "-v", "${env:HOME}${env:USERPROFILE}/.aspnet/https:/home/vscode/.aspnet/https",
+    "-e", "ASPNETCORE_Kestrel__Certificates__Default__Password=SecurePwdGoesHere",
+    "-e", "ASPNETCORE_Kestrel__Certificates__Default__Path=/home/vscode/.aspnet/https/aspnetapp.pfx"
+]
+```
+
+Finally, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) if you've already opened your folder in a container so the settings take effect.
 
 ## Contributing
 

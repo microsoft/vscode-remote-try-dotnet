@@ -3,11 +3,7 @@
 	"dockerFile": "Dockerfile",
 
 	// Specifies ports to publish
-	"appPort": [9000],
-
-	// Comment out the next line to run as root instead. Linux users, 
-	// update Dockerfile with your user's UID/GID if not 1000.
-	"runArgs": [ "-u", "vscode" ],
+	"appPort": [5000, 5001],
 
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
@@ -18,6 +14,29 @@
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",
 
+	"runArgs": [
+		// Comment out the next line to run as root instead. Linux users, 
+		// update Dockerfile with your user's UID/GID if not 1000.
+		"-u", "vscode",
+
+		// You can enable HTTPS in ASP.NET by mounting a local dev cert exported the dotnet CLI locally:
+		//   Windows PowerShell:
+		//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere" 
+		//   macOS/Linux terminal:
+		//     dotnet dev-certs https --trust && dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+		//
+		// After running the command above, uncomment the lines below and open / rebuild the container.
+		// "-v", "${env:HOME}${env:USERPROFILE}/.aspnet/https:/home/vscode/.aspnet/https",
+		// "-e", "ASPNETCORE_Kestrel__Endpoints__Https__Url=https://*:5001",
+		// "-e", "ASPNETCORE_Kestrel__Certificates__Default__Password=SecurePwdGoesHere",
+		// "-e", "ASPNETCORE_Kestrel__Certificates__Default__Path=/home/vscode/.aspnet/https/aspnetapp.pfx",
+
+		// Override the default HTTP endpoint - need to listen to '*' for appPort to work
+		"-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000"
+	],
+	
+
+	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
 		"ms-vscode.csharp"
 	]

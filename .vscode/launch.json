@@ -9,15 +9,16 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/aspnetapp.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.0/aspnetapp.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
             "stopAtEntry": false,
-            "launchBrowser": {
-                "enabled": false
-            },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
             }
         }
     ]
