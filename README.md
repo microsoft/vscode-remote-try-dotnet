@@ -28,24 +28,28 @@ One you have this sample opened in a container, you'll be able to work with it l
 Some things to try:
 
 1. **Restore Packages:** When notified by the C# extension to install packages, click Restore to trigger the process from inside the container!
+
 2. **Edit:**
    - Open `Program.cs`
    - Try adding some code and check out the language features.
+
 3. **Terminal:** Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>\`</kbd> and type `dotnet --version` and other Linux commands from the terminal window.
+
 4. **Build, Run, and Debug:**
    - Open `Program.cs`
    - Add a breakpoint (e.g. on line 21).
    - Press <kbd>F5</kbd> to launch the app in the container.
    - Once the breakpoint is hit, try hovering over variables, examining locals, and more.
    - Continue, then open a local browser and go to `http://localhost:5000` and note you can connect to the server in the container.
+
 5. **Forward another port:**
    - Stop debugging and remove the breakpoint.
    - Open `launch.json`
    - Add `"ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:9000",` to the `"env"` property array.
 
-        > **Note:** By default, ASP.NET Core only listens to localhost. The challenge is that ASP.NET Core thinks that localhost is inside the container. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. Therefore, listening to `*` or `0.0.0.0` is required for the `appPort` property to function. 
+        > **Note:** By default, ASP.NET Core only listens to localhost. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. This means that ASP.NET Core thinks that localhost is inside the container, so the app needs to listen to `*` or `0.0.0.0` to be accessible. 
         >
-        > This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/devcontainer.json` to override the application config. Using an environment variable that is only present in the container allows you to keep the application config using `localhost` when running locally - which is why we'll override the variable here.
+        > This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/devcontainer.json`. Using an environment variable to override this setting in the container only allows you to leave the config as-is for use when running locally.
 
    - Press <kbd>F5</kbd> to launch the app in the container.
    - Press <kbd>F1</kbd> and run the **Remote-Containers: Forward Port from Container...** command.
@@ -65,7 +69,7 @@ dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.as
 **macOS/Linux terminal**
 
 ```powershell
-dotnet dev-certs https --trust && dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
 ```
 
 Next, update the `runArgs` array in `.devcontainer/devcontainer.json` as follows:
