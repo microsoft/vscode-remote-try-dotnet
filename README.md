@@ -10,20 +10,25 @@ Follow these steps to open this sample in a container:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started).
 
-2. **Linux users:** Update `USER_UID` and `USER_GID` in `.devcontainer/Dockerfile` with your user UID/GID if not 1000 to avoid creating files as root.
+2. To use this repository, you can either open a locally cloned copy of the code:
 
-3. If you want to enable **HTTPS**, see [enabling HTTPS](#enabling-https) to reuse your local development cert in the container.
-
-4. This container also runs as a non-root user with sudo access by default. Comment out `"-u", "vscode"` in the `runArgs` property array in `.devcontainer/devcontainer.json` if you'd prefer to run as root.
-
-5. If you're not yet in a development container:
-   - Clone this repository.
+   - Clone this repository to your local filesystem.
    - Press <kbd>F1</kbd> and select the **Remote-Containers: Open Folder in Container...** command.
    - Select the cloned copy of this folder, wait for the container to start, and try things out!
+
+   Or open the repository in an isolated Docker volume:
+
+    - Press <kbd>F1</kbd> and select the **Remote-Containers: Try a Sample...** command.
+    - Choose the "Node" sample, wait for the container to start and try things out!
+        > **Note:** Under the hood, this will use **Remote-Containers: Open Repository in Container...** command to clone the source code in a Docker volume instead of the local filesystem.
+
+3. If you want to enable **HTTPS**, see [enabling HTTPS](#enabling-https) to reuse your local development cert in the container.
 
 ## Things to try
 
 One you have this sample opened in a container, you'll be able to work with it like you would locally.
+
+> **Note:** This container runs as a non-root user with sudo access by default. Comment out `"remoteUser": "node"` in `.devcontainer/devcontainer.json` if you'd prefer to run as root.
 
 Some things to try:
 
@@ -45,7 +50,7 @@ Some things to try:
 5. **Forward another port:**
    - Stop debugging and remove the breakpoint.
    - Open `launch.json`
-   - Add `"ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:9000",` to the `"env"` property array.
+   - Add `"ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:9000",` to the `"env"` property.
 
         > **Note:** By default, ASP.NET Core only listens to localhost. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. Unfortunately, this means that ASP.NET Core only listens to localhost inside the container itself, not externally. It needs to listen to `*` or `0.0.0.0` instead to resolve the issue.
         >
@@ -72,17 +77,16 @@ dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.as
 dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
 ```
 
-Next, update the `runArgs` array in `.devcontainer/devcontainer.json` as follows:
+Next, update the following properties in `.devcontainer/devcontainer.json`:
 
 ```json
-"runArgs": [
-    "-u", "vscode",
-    "-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000",
-    "-e", "ASPNETCORE_Kestrel__Endpoints__Https__Url=https://*:5001",
-    "-v", "${env:HOME}${env:USERPROFILE}/.aspnet/https:/home/vscode/.aspnet/https",
-    "-e", "ASPNETCORE_Kestrel__Certificates__Default__Password=SecurePwdGoesHere",
-    "-e", "ASPNETCORE_Kestrel__Certificates__Default__Path=/home/vscode/.aspnet/https/aspnetapp.pfx"
-]
+"mounts": [
+    "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind"
+],
+"remoteEnv": {
+    "ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:5000",
+    "ASPNETCORE_Kestrel__Endpoints__Https__Url": "https://*:5001","ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere","ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
+}
 ```
 
 Finally, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) if you've already opened your folder in a container so the settings take effect.
