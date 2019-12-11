@@ -5,8 +5,4 @@
     <UserSecretsId>31051026529000467138</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
 </Project>
