@@ -19,7 +19,7 @@ Follow these steps to open this sample in a container:
    Or open the repository in an isolated Docker volume:
 
     - Press <kbd>F1</kbd> and select the **Remote-Containers: Try a Sample...** command.
-    - Choose the "Node" sample, wait for the container to start and try things out!
+    - Choose the ".NET Core" sample, wait for the container to start and try things out!
         > **Note:** Under the hood, this will use **Remote-Containers: Open Repository in Container...** command to clone the source code in a Docker volume instead of the local filesystem.
 
 3. If you want to enable **HTTPS**, see [enabling HTTPS](#enabling-https) to reuse your local development cert in the container.
