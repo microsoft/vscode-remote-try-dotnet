@@ -2,7 +2,8 @@
 	"name": ".NET Core Sample",
 	"dockerFile": "Dockerfile",
 
-	// Specifies ports to publish
+	// Use 'appPort' to create a container with published ports. If the port isn't working, be sure
+	// your server accepts connections from all interfaces (0.0.0.0 or '*'), not just localhost.
 	"appPort": [5000, 5001],
 
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
@@ -14,28 +15,29 @@
 	// Uncomment the next line to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",
 
-	"runArgs": [
-		// Comment out the next line to run as root instead. Linux users, 
-		// update Dockerfile with your user's UID/GID if not 1000.
-		"-u", "vscode",
-
-		// To reuse your local HTTPS dev cert, first export it locally using this command: 
-		//  * Windows PowerShell:
-		//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere" 
-		//  * macOS/Linux terminal:
-		//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
-		//
-		// Next, after running the command above, uncomment the lines below and open / rebuild the container.
-		//
-		// "-v", "${env:HOME}${env:USERPROFILE}/.aspnet/https:/home/vscode/.aspnet/https",
-		// "-e", "ASPNETCORE_Kestrel__Endpoints__Https__Url=https://*:5001",
-		// "-e", "ASPNETCORE_Kestrel__Certificates__Default__Password=SecurePwdGoesHere",
-		// "-e", "ASPNETCORE_Kestrel__Certificates__Default__Path=/home/vscode/.aspnet/https/aspnetapp.pfx",
-
-		// Override the default HTTP endpoint - need to listen to '*' for appPort to work
-		"-e", "ASPNETCORE_Kestrel__Endpoints__Http__Url=http://*:5000"
+	// [Optional] To reuse of your local HTTPS dev cert, first export it locally using this command: 
+	//  * Windows PowerShell:
+	//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere" 
+	//  * macOS/Linux terminal:
+	//     dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+	//
+	// Next, after running the command above, uncomment lines in the 'mounts' and 'remoteEnv' lines below, 
+	// and open / rebuild the container so the settings take effect.
+	//
+	"mounts": [
+		// "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind"
 	],
-	
+	"remoteEnv": {
+		//Override the default HTTP endpoints - need to listen to '*' for appPort to work
+		"ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:5000"
+
+		// "ASPNETCORE_Kestrel__Endpoints__Https__Url": "https://*:5001",
+		// "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
+		// "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
+	},
+
+	// Comment out the next line to run as root
+	"remoteUser": "vscode",	
 
 	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
