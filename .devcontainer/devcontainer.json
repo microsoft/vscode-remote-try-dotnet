@@ -33,7 +33,7 @@
 
 		// "ASPNETCORE_Kestrel__Endpoints__Https__Url": "https://*:5001",
 		// "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
-		// "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
+		// "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx"
 	},
 
 	// Comment out the next line to run as root
