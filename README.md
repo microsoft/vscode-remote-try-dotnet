@@ -57,7 +57,7 @@ Some things to try:
         > This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/devcontainer.json`. By using an environment variable to override this setting in the container only, you can leave your actual application config as-is for use when running locally.
 
    - Press <kbd>F5</kbd> to launch the app in the container.
-   - Press <kbd>F1</kbd> and run the **Remote-Containers: Forward Port from Container...** command.
+   - Press <kbd>F1</kbd> and run the **Forward a Port** command.
    - Select port 9000.
    - Click "Open Browser" in the notification that appears to access the web app on this new port.
 
