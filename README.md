@@ -10,17 +10,17 @@ Follow these steps to open this sample in a container:
 
 1. If this is your first time using a development container, please follow the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started).
 
-2. To use this repository, you can either open a locally cloned copy of the code:
-
-   - Clone this repository to your local filesystem.
-   - Press <kbd>F1</kbd> and select the **Remote-Containers: Open Folder in Container...** command.
-   - Select the cloned copy of this folder, wait for the container to start, and try things out!
-
-   Or open the repository in an isolated Docker volume:
+2. To use this repository, you can either open the repository in an isolated Docker volume:
 
     - Press <kbd>F1</kbd> and select the **Remote-Containers: Try a Sample...** command.
     - Choose the ".NET Core" sample, wait for the container to start and try things out!
         > **Note:** Under the hood, this will use **Remote-Containers: Open Repository in Container...** command to clone the source code in a Docker volume instead of the local filesystem.
+
+   Or open a locally cloned copy of the code:
+
+   - Clone this repository to your local filesystem.
+   - Press <kbd>F1</kbd> and select the **Remote-Containers: Open Folder in Container...** command.
+   - Select the cloned copy of this folder, wait for the container to start, and try things out!
 
 3. If you want to enable **HTTPS**, see [enabling HTTPS](#enabling-https) to reuse your local development cert in the container.
 
@@ -49,13 +49,8 @@ Some things to try:
 
 5. **Forward another port:**
    - Stop debugging and remove the breakpoint.
-   - Open `launch.json`
-   - Add `"ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:9000",` to the `"env"` property.
-
-        > **Note:** By default, ASP.NET Core only listens to localhost. If you use the `appPort` property in `.devcontainer/devcontainer.json`, the port is [published](https://docs.docker.com/config/containers/container-networking/#published-ports) rather than forwarded. Unfortunately, this means that ASP.NET Core only listens to localhost inside the container itself, not externally. It needs to listen to `*` or `0.0.0.0` instead to resolve the issue.
-        >
-        > This container solves that problem by setting the environment variable `ASPNETCORE_Kestrel__Endpoints__Http__Url` to `http://*:5000` in `.devcontainer/devcontainer.json`. By using an environment variable to override this setting in the container only, you can leave your actual application config as-is for use when running locally.
-
+   - Open `appsettings.Development.json`
+   - Update `"Url": "http://localhost:5000"` to `"Url": "http://localhost:9000"`.
    - Press <kbd>F5</kbd> to launch the app in the container.
    - Press <kbd>F1</kbd> and run the **Forward a Port** command.
    - Select port 9000.
@@ -63,35 +58,47 @@ Some things to try:
 
 ### Enabling HTTPS
 
-To enable HTTPS for this sample, you can mount an exported copy of your local dev certificate. First, export it using the following command:
+To enable HTTPS for this sample, you can mount an exported copy of your local dev certificate. 
 
-**Windows PowerShell**
+1. Enable HTTPS in the sample by updating the `env` property in `.vscode/launch.json` as follows:
 
-```powershell
-dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
-```
+   ```json
+   "env": {
+         "ASPNETCORE_ENVIRONMENT": "HttpsDevelopment"
+   }
+   ```
 
-**macOS/Linux terminal**
+2. Now, locally export the HTTPS certificate using the following command:
 
-```powershell
-dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
-```
+   **Windows PowerShell**
 
-Next, update the following properties in `.devcontainer/devcontainer.json`:
+   ```powershell
+   dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+   ```
+
+   **macOS/Linux terminal**
+
+   ```powershell
+   dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
+   ```
+
+3. Next, update the following properties in `.devcontainer/devcontainer.json`:
 
 ```json
 "mounts": [
     "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind"
 ],
 "remoteEnv": {
-    "ASPNETCORE_Kestrel__Endpoints__Http__Url": "http://*:5000",
-    "ASPNETCORE_Kestrel__Endpoints__Https__Url": "https://*:5001",
     "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
     "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx"
 }
 ```
 
-Finally, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) if you've already opened your folder in a container so the settings take effect.
+> **Note:** See [here for an alternative](https://github.com/microsoft/vscode-dev-containers/blob/v0.42.0/containers/dotnetcore-2.1/README.md#enabling-https-in-aspnet-core) when using an extension version below v0.98.0 as the `forwardPorts` property is not available.
+
+4. Finally, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) if you've already opened your folder in a container so the settings take effect. 
+
+Next time you debug using VS Code (<kbd>F5</kbd>), you'll be able to use HTTPS! Note that you will need to specifically navigate to `https://localhost:5001` to get the certificate to work (**not** `https://127.0.0.1:5001`).
 
 ## Contributing
 
