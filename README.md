@@ -58,7 +58,7 @@ Some things to try:
 
 ### Enabling HTTPS
 
-To enable HTTPS for this sample, you can mount an exported copy of your local dev certificate. 
+To enable HTTPS for this sample, you can mount an exported copy of a locally generated dev certificate. Note that these instructions assume you already have the `dotnet` CLI installed on your local operating system.
 
 1. Enable HTTPS in the sample by updating the `env` property in `.vscode/launch.json` as follows:
 
