@@ -16,8 +16,7 @@ ARG USER_GID=$USER_UID
 # [Optional] Version of Node.js to install.
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
-ENV HOME_DIR=/home/$USERNAME
-ENV NVM_DIR=$HOME_DIR/.nvm
+ENV NVM_DIR=/home/$USERNAME/.nvm
 
 # [Optional] Install the Azure CLI
 ARG INSTALL_AZURE_CLI="false"
