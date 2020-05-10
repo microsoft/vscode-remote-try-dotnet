@@ -5,6 +5,7 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
+		  "USERNAME": "bartr",
 			"INSTALL_NODE": "false",
 			"NODE_VERSION": "lts/*",
 			"INSTALL_AZURE_CLI": "false"
@@ -46,5 +47,5 @@
 	// "postCreateCommand": "dotnet restore",
 
 	// Comment out to connect as root user. See https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode"
+	"remoteUser": "bartr"
 }
