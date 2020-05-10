@@ -2,15 +2,19 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.112.0/containers/dotnetcore-3.1
 {
 	"name": "C# Sample",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-		  "USERNAME": "bartr",
-			"INSTALL_NODE": "false",
-			"NODE_VERSION": "lts/*",
-			"INSTALL_AZURE_CLI": "false"
-		}
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "USERNAME": "bartr",
+      "INSTALL_NODE": "false",
+      "NODE_VERSION": "lts/*",
+      "INSTALL_AZURE_CLI": "false"
+    }
 	},
+
+	// Comment out to connect as root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// make sure this is the same as USERNAME above
+	"remoteUser": "bartr",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
@@ -44,8 +48,5 @@
 	},
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "dotnet restore",
-
-	// Comment out to connect as root user. See https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "bartr"
+	"postCreateCommand": "dotnet restore"
 }

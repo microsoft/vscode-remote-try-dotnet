@@ -16,7 +16,8 @@ ARG USER_GID=$USER_UID
 # [Optional] Version of Node.js to install.
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
-ENV NVM_DIR=/home/$USERNAME/.nvm
+ENV HOME_DIR=/home/$USERNAME
+ENV NVM_DIR=$HOME_DIR/.nvm
 
 # [Optional] Install the Azure CLI
 ARG INSTALL_AZURE_CLI="false"
@@ -72,7 +73,11 @@ RUN apt-get update \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    #
+    # take ownership of the home directory
+    && chown -R $USERNAME:$USERNAME /home/$USERNAME
+
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
