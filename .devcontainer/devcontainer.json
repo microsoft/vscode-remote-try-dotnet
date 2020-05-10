@@ -5,7 +5,7 @@
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
-      "USERNAME": "bartr",
+      "USERNAME": "vscode",
       "INSTALL_NODE": "false",
       "NODE_VERSION": "lts/*",
       "INSTALL_AZURE_CLI": "false"
@@ -14,7 +14,7 @@
 
 	// Comment out to connect as root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// make sure this is the same as USERNAME above
-	"remoteUser": "bartr",
+	"remoteUser": "vscode",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
