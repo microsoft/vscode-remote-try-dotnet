@@ -16,7 +16,7 @@ ARG USER_GID=$USER_UID
 # [Optional] Version of Node.js to install.
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
-ENV NVM_DIR=/home/vscode/.nvm
+ENV NVM_DIR=/home/$USERNAME/.nvm
 
 # [Optional] Install the Azure CLI
 ARG INSTALL_AZURE_CLI="false"
@@ -45,13 +45,13 @@ RUN apt-get update \
         # Install nvm and Node
         mkdir ${NVM_DIR} \
         && curl -so- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash 2>&1 \
-        && chown -R vscode:vscode ${NVM_DIR} \
+        && chown -R $USERNAME:$USERNAME ${NVM_DIR} \
         && /bin/bash -c "source $NVM_DIR/nvm.sh \
             && nvm install ${NODE_VERSION} \
             && nvm alias default ${NODE_VERSION}" 2>&1 \
         && INIT_STRING='[ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"  && [ -s "$NVM_DIR/bash_completion" ] && \\. "$NVM_DIR/bash_completion"' \
-        && echo $INIT_STRING >> /home/vscode/.bashrc \
-        && echo $INIT_STRING >> /home/vscode/.zshrc \
+        && echo $INIT_STRING >> /home/$USERNAME/.bashrc \
+        && echo $INIT_STRING >> /home/$USERNAME/.zshrc \
         && echo $INIT_STRING >> /root/.zshrc \
         #
         # Install yarn
