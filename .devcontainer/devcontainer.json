@@ -1,20 +1,16 @@
-// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.112.0/containers/dotnetcore-3.1
 {
 	"name": "C# Sample",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "args": {
-      "USERNAME": "vscode",
-      "INSTALL_NODE": "false",
-      "NODE_VERSION": "lts/*",
-      "INSTALL_AZURE_CLI": "false"
-    }
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": { 
+			// Update 'VARIANT' to pick a .NET Core version. Rebuild the container 
+			// if it already exists to update. Available variants: 2.1-bionic, 3.1-bionic
+			"VARIANT": "3.1-bionic",
+			"INSTALL_NODE": "false",
+			"NODE_VERSION": "lts/*",
+			"INSTALL_AZURE_CLI": "false"
+		}
 	},
-
-	// Comment out to connect as root user. See https://aka.ms/vscode-remote/containers/non-root.
-	// make sure this is the same as USERNAME above
-	"remoteUser": "vscode",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
@@ -25,7 +21,6 @@
 	"extensions": [
 		"ms-dotnettools.csharp"
 	],
-
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [5000, 5001],
@@ -45,8 +40,11 @@
 	"remoteEnv": {
 		// "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
 		// "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
-	}
+	},
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "dotnet restore"
+	// "postCreateCommand": "dotnet restore",
+
+	// Comment this out to connect as a root instead.
+	"remoteUser": "vscode"
 }
