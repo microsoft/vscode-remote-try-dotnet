@@ -1,10 +1,11 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.134.0/containers/dotnetcore
 {
 	"name": "C# Sample",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 
-			// Update 'VARIANT' to pick a .NET Core version. Rebuild the container 
-			// if it already exists to update. Available variants: 2.1-bionic, 3.1-bionic
+			// Update 'VARIANT' to pick a .NET Core version: 2.1-bionic, 3.1-bionic
 			"VARIANT": "3.1-bionic",
 			"INSTALL_NODE": "false",
 			"NODE_VERSION": "lts/*",
