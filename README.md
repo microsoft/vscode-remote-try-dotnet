@@ -11,7 +11,7 @@ This is a sample project that lets you try out either option in a few easy steps
 ### GitHub Codespaces
 Follow these steps to open this sample in a Codespace:
 1. Click the Code drop-down menu and select the **Open with Codespaces** option.
-1. Select **+ New codespace** at the bottom on the pane. If you don't own the repo, this will create a fork of this repository under your account.
+1. Select **+ New codespace** at the bottom on the pane.
 
 For more info, check out the [GitHub documentation](https://docs.github.com/en/free-pro-team@latest/github/developing-online-with-codespaces/creating-a-codespace#creating-a-codespace).
 
@@ -54,9 +54,10 @@ Some things to try:
    - Open `Program.cs`
    - Add a breakpoint (e.g. on line 21).
    - Press <kbd>F5</kbd> to launch the app in the container.
-   - Once the breakpoint is hit, try hovering over variables, examining locals, and more.
-   - Continue, then open a local browser and go to `http://localhost:5000` and note you can connect to the server in the container.
-   - The status line shows '1 Port Available'. Clicking the status bar entry shows the 'Ports' view that lists the currently available ports.
+   - Once the breakpoint is hit, try hovering over variables, examining locals, and more.   
+   - Continue (<kbd>F5</kbd>). You can connect to the server in the container by clicking "Open in Browser" next to port 5000 in the 'Ports' view (you can get to the 'Ports' view by clicking on the "2" in the status bar, which means your app has 2 forwarded ports).
+
+   > **Note:** In Remote - Containers, you can access your app at `http://localhost:5000` in a local browser. But in a browser-based Codespace, you must click the link from the `Ports` view so that the service handles port forwarding in the browser and generates the correct URL.
 
 5. **Rebuild or update your container** (*Currently, only containers with the VS Code Remote - Containers extension can be rebuilt.*)
 
