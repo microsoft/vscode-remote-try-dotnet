@@ -55,21 +55,23 @@ Some things to try:
    - Add a breakpoint (e.g. on line 21).
    - Press <kbd>F5</kbd> to launch the app in the container.
    - Once the breakpoint is hit, try hovering over variables, examining locals, and more.   
-   - Continue (<kbd>F5</kbd>). You can connect to the server in the container by clicking "Open in Browser" next to port 5000 in the 'Ports' view (you can get to the 'Ports' view by clicking on the "2" in the status bar, which means your app has 2 forwarded ports).
+   - Continue (<kbd>F5</kbd>). You can connect to the server in the container by either: 
+      - Clicking on `Open in Browser` in the notification telling you: `Your service running on port 5000 is available`.
+      - Clicking the globe icon in the 'Ports' view. The 'Ports' view gives you an organized table of your forwarded ports, and you can access it with the command **Ports: Focus on Ports View**.
 
-   > **Note:** In Remote - Containers, you can access your app at `http://localhost:5000` in a local browser. But in a browser-based Codespace, you must click the link from the `Ports` view so that the service handles port forwarding in the browser and generates the correct URL.
+   > **Note:** In Remote - Containers, you can access your app at `http://localhost:5000` in a local browser. But in a browser-based Codespace, you must click the link from the notification or the `Ports` view so that the service handles port forwarding in the browser and generates the correct URL.
 
-5. **Rebuild or update your container** (*Currently, only containers with the VS Code Remote - Containers extension can be rebuilt.*)
+5. **Rebuild or update your container**
 
    You may want to make changes to your container, such as installing a different version of a software or forwarding a new port. You'll rebuild your container for your changes to take effect. 
 
    **Forward a port statically:** As an example change, let's forward a port statically in the `.devcontainer/devcontainer.json` file. 
 
-   > **Note:** Remote-Containers and Codespaces also take care of dynamic port forwarding, but there may be instances in which we want to statically declare a forwarded port. 
+   > **Note:** Remote-Containers and Codespaces also take care of dynamic port forwarding, but there may be instances in which we want to statically declare a forwarded port.
    
    - Open the `.devcontainer/devcontainer.json` file.
    - Uncomment the `forwardedPorts` attribute and adjust the port numbers as needed.
-   - Press <kbd>F1</kbd> and select the **Remote-Containers: Rebuild Container** command so the modifications are picked up.
+   - Press <kbd>F1</kbd> and select the **Remote-Containers: Rebuild Container** or **Codespaces: Rebuild Container** command so the modifications are picked up.
 
 ### Enabling HTTPS
 
