@@ -25,6 +25,20 @@
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [5000, 5001],
+	
+	// Use 'portsAttributes' to set default properties for specific forwarded ports.
+	// You can use a port number (i.e. 5000), range of numbers, or a regex to match the running process.
+	"portsAttributes": {
+		"5000": {
+			"label": "Hello Remote World",
+			"onAutoForward": "notify"
+		}
+	},
+
+	// Use 'otherPortsAttributes' to configure any ports that aren't configured using 'portsAttributes'.
+	// "otherPortsAttributes": {
+	// 		"onAutoForward": "silent"
+	// },
 
 	// [Optional] To reuse of your local HTTPS dev cert:
 	//
@@ -51,14 +65,6 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",
-
-	// Use 'portsAttributes' to set default properties for specific forwarded ports.
-	"portsAttributes": {
-		"5000": {
-			"label": "Hello Remote World",
-			"onAutoForward": "notify"
-		}
-	},
 
 	// Comment this out to connect as a root instead.
 	"remoteUser": "vscode"
