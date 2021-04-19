@@ -26,8 +26,7 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [5000, 5001],
 	
-	// Use 'portsAttributes' to set default properties for specific forwarded ports.
-	// You can use a port number (i.e. 5000), range of numbers, or a regex to match the running process.
+	// Use 'portsAttributes' to set default properties for specific forwarded ports. More info: https://code.visualstudio.com/docs/remote/devcontainerjson-reference.
 	"portsAttributes": {
 		"5000": {
 			"label": "Hello Remote World",
@@ -66,6 +65,6 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "dotnet restore",
 
-	// Comment this out to connect as a root instead.
+	// Comment this out to connect as a root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }
