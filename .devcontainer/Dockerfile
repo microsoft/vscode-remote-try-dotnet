@@ -2,7 +2,7 @@
 
 # [Choice] .NET Core version: 5.0, 3.1, 2.1
 ARG VARIANT="3.1"
-FROM mcr.microsoft.com/vscode/devcontainers/dotnetcore:0-${VARIANT}
+FROM mcr.microsoft.com/devcontainers/dotnetcore:0-${VARIANT}
 
 # [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
 ARG NODE_VERSION="none"
