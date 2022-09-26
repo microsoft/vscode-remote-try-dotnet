@@ -1,8 +1,8 @@
 # Try Out Development Containers: .NET Core
 
-[![Open in Remote - Containers](https://img.shields.io/static/v1?label=Remote%20-%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-dotnetcore)
+[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-dotnetcore)
 
-A **development container** is a running [Docker](https://www.docker.com) container with a well-defined tool/runtime stack and its prerequisites. You can try out development containers with **[GitHub Codespaces](https://github.com/features/codespaces)** or **[Visual Studio Code Remote - Containers](https://aka.ms/vscode-remote/containers)**.
+A **development container** is a running [Docker](https://www.docker.com) container with a well-defined tool/runtime stack and its prerequisites. You can try out development containers with **[GitHub Codespaces](https://github.com/features/codespaces)** or **[Visual Studio Code Dev Containers](https://aka.ms/vscode-remote/containers)**.
 
 This is a sample project that lets you try out either option in a few easy steps. We have a variety of other [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-remote-try-&type=Repositories) sample projects, too.
 
@@ -17,24 +17,24 @@ Follow these steps to open this sample in a Codespace:
 
 For more info, check out the [GitHub documentation](https://docs.github.com/en/free-pro-team@latest/github/developing-online-with-codespaces/creating-a-codespace#creating-a-codespace).
 
-### VS Code Remote - Containers
+### VS Code Dev Containers
 
-If you already have VS Code and Docker installed, you can click the badge above or [here](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-dotnetcore) to get started. Clicking these links will cause VS Code to automatically install the Remote - Containers extension if needed, clone the source code into a container volume, and spin up a dev container for use.
+If you already have VS Code and Docker installed, you can click the badge above or [here](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-dotnetcore) to get started. Clicking these links will cause VS Code to automatically install the Dev Containers extension if needed, clone the source code into a container volume, and spin up a dev container for use.
 
-Follow these steps to open this sample in a container using the VS Code Remote - Containers extension:
+Follow these steps to open this sample in a container using the VS Code Dev Containers extension:
 
 1. If this is your first time using a development container, please ensure your system meets the pre-reqs (i.e. have Docker installed) in the [getting started steps](https://aka.ms/vscode-remote/containers/getting-started).
 
 2. To use this repository, you can either open the repository in an isolated Docker volume:
 
-    - Press <kbd>F1</kbd> and select the **Remote-Containers: Try a Sample...** command.
+    - Press <kbd>F1</kbd> and select the **Dev Containers: Try a Sample...** command.
     - Choose the ".NET Core" sample, wait for the container to start, and try things out!
-        > **Note:** Under the hood, this will use the **Remote-Containers: Clone Repository in Container Volume...** command to clone the source code in a Docker volume instead of the local filesystem. [Volumes](https://docs.docker.com/storage/volumes/) are the preferred mechanism for persisting container data.
+        > **Note:** Under the hood, this will use the **Dev Containers: Clone Repository in Container Volume...** command to clone the source code in a Docker volume instead of the local filesystem. [Volumes](https://docs.docker.com/storage/volumes/) are the preferred mechanism for persisting container data.
 
    Or open a locally cloned copy of the code:
 
    - Clone this repository to your local filesystem.
-   - Press <kbd>F1</kbd> and select the **Remote-Containers: Open Folder in Container...** command.
+   - Press <kbd>F1</kbd> and select the **Dev Containers: Open Folder in Container...** command.
    - Select the cloned copy of this folder, wait for the container to start, and try things out!
 
 3. If you want to enable **HTTPS**, see [enabling HTTPS](#enabling-https) to reuse your local development cert in the container.
@@ -65,7 +65,7 @@ Some things to try:
       - Clicking the globe icon in the 'Ports' view. The 'Ports' view gives you an organized table of your forwarded ports, and you can access it with the command **Ports: Focus on Ports View**.
     - Notice port 5000 in the 'Ports' view is labeled "Hello Remote World." In `devcontainer.json`, you can set `"portsAttributes"`, such as a label for your forwarded ports and the action to be taken when the port is autoforwarded.
 
-   > **Note:** In Remote - Containers, you can access your app at `http://localhost:5000` in a local browser. But in a browser-based Codespace, you must click the link from the notification or the `Ports` view so that the service handles port forwarding in the browser and generates the correct URL.
+   > **Note:** In Dev Containers, you can access your app at `http://localhost:5000` in a local browser. But in a browser-based Codespace, you must click the link from the notification or the `Ports` view so that the service handles port forwarding in the browser and generates the correct URL.
 
 5. **Rebuild or update your container**
 
@@ -75,7 +75,7 @@ Some things to try:
    
    - Open the `.devcontainer/devcontainer.json` file.
    - Modify the `"onAutoForward"` attribute in your `portsAttributes` from `"notify"` to `"openBrowser"`.
-   - Press <kbd>F1</kbd> and select the **Remote-Containers: Rebuild Container** or **Codespaces: Rebuild Container** command so the modifications are picked up.
+   - Press <kbd>F1</kbd> and select the **Dev Containers: Rebuild Container** or **Codespaces: Rebuild Container** command so the modifications are picked up.
 
 ### Enabling HTTPS
 
@@ -114,7 +114,7 @@ To enable HTTPS for this sample, you can mount an exported copy of a locally gen
 
 4. Finally, make the certificate available in the container as follows:
 
-    **If using GitHub Codespaces and/or Remote - Containers**
+    **If using GitHub Codespaces and/or Dev Containers**
 
     1. Start the container/codespace
     2. Drag `~/.aspnet/https/aspnetapp.pfx` from your local machine into the root of the File Explorer in VS Code.
@@ -123,7 +123,7 @@ To enable HTTPS for this sample, you can mount an exported copy of a locally gen
         mkdir -p /home/vscode/.aspnet/https && mv aspnetapp.pfx /home/vscode/.aspnet/https
         ```
 
-    **If using only Remote - Containers with a local container**
+    **If using only Dev Containers with a local container**
 
     Add the following to `.devcontainer/devcontainer.json`:
 
@@ -131,7 +131,7 @@ To enable HTTPS for this sample, you can mount an exported copy of a locally gen
     "mounts": [ "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind" ]
     ```
 
-5. If you've already opened your folder in a container, rebuild the container using the **Remote-Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
+5. If you've already opened your folder in a container, rebuild the container using the **Dev Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
 
 Next time you debug using VS Code (<kbd>F5</kbd>), you'll be able to use HTTPS! Note that you will need to specifically navigate to `https://localhost:5001` to get the certificate to work (**not** `https://127.0.0.1:5001`).
 
