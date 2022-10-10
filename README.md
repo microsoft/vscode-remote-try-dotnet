@@ -1,6 +1,7 @@
-# Try Out Development Containers: .NET Core
+# Try Out Development Containers: .NET
 
-[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-dotnetcore)
+[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-dotnet)
+
 
 A **development container** is a running [Docker](https://www.docker.com) container with a well-defined tool/runtime stack and its prerequisites. You can try out development containers with **[GitHub Codespaces](https://github.com/features/codespaces)** or **[Visual Studio Code Dev Containers](https://aka.ms/vscode-remote/containers)**.
 
@@ -19,7 +20,7 @@ For more info, check out the [GitHub documentation](https://docs.github.com/en/f
 
 ### VS Code Dev Containers
 
-If you already have VS Code and Docker installed, you can click the badge above or [here](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-dotnetcore) to get started. Clicking these links will cause VS Code to automatically install the Dev Containers extension if needed, clone the source code into a container volume, and spin up a dev container for use.
+If you already have VS Code and Docker installed, you can click the badge above or [here](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-dotnet) to get started. Clicking these links will cause VS Code to automatically install the Dev Containers extension if needed, clone the source code into a container volume, and spin up a dev container for use.
 
 Follow these steps to open this sample in a container using the VS Code Dev Containers extension:
 
@@ -47,25 +48,24 @@ Once you have this sample opened, you'll be able to work with it like you would 
 
 Some things to try:
 
-1. **Restore Packages:** When notified by the C# extension to install packages, click Restore to trigger the process from inside the container!
+1. **Restore Packages:** When notified by the C# extension to install packages, click Restore to trigger the process from inside the container! You can also execute `dotnet restore` command in a terminal.
 
 2. **Edit:**
    - Open `Program.cs`
    - Try adding some code and check out the language features.
 
-3. **Terminal:** Press <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>\`</kbd> and type `dotnet --version` and other Linux commands from the terminal window.
-
 4. **Build, Run, and Debug:**
    - Open `Program.cs`
-   - Add a breakpoint (e.g. on line 21).
+   - Add a breakpoint (e.g. on line 16).
    - Press <kbd>F5</kbd> to launch the app in the container.
+   - Navigate to the weather endpoint, for example, [http://localhost:3000/paris/weather](http://localhost:3000/paris/weather).
    - Once the breakpoint is hit, try hovering over variables, examining locals, and more.   
    - Continue (<kbd>F5</kbd>). You can connect to the server in the container by either: 
-      - Clicking on `Open in Browser` in the notification telling you: `Your service running on port 5000 is available`.
+      - Clicking on `Open in Browser` in the notification telling you: `Your service running on port 3000 is available`.
       - Clicking the globe icon in the 'Ports' view. The 'Ports' view gives you an organized table of your forwarded ports, and you can access it with the command **Ports: Focus on Ports View**.
-    - Notice port 5000 in the 'Ports' view is labeled "Hello Remote World." In `devcontainer.json`, you can set `"portsAttributes"`, such as a label for your forwarded ports and the action to be taken when the port is autoforwarded.
+    - Notice port 3000 in the 'Ports' view is labeled "Hello Remote World." In `devcontainer.json`, you can set `"portsAttributes"`, such as a label for your forwarded ports and the action to be taken when the port is autoforwarded.
 
-   > **Note:** In Dev Containers, you can access your app at `http://localhost:5000` in a local browser. But in a browser-based Codespace, you must click the link from the notification or the `Ports` view so that the service handles port forwarding in the browser and generates the correct URL.
+   > **Note:** In Dev Containers, you can access your app at `http://localhost:3000` in a local browser. But in a browser-based Codespace, you must click the link from the notification or the `Ports` view so that the service handles port forwarding in the browser and generates the correct URL.
 
 5. **Rebuild or update your container**
 
@@ -77,79 +77,24 @@ Some things to try:
    - Modify the `"onAutoForward"` attribute in your `portsAttributes` from `"notify"` to `"openBrowser"`.
    - Press <kbd>F1</kbd> and select the **Dev Containers: Rebuild Container** or **Codespaces: Rebuild Container** command so the modifications are picked up.
 
-### Enabling HTTPS
-
-To enable HTTPS for this sample, you can mount an exported copy of a locally generated dev certificate. Note that these instructions assume you already have the `dotnet` CLI installed on your local operating system.
-
-1. Enable HTTPS in the sample by updating the `env` property in `.vscode/launch.json` as follows:
-
-   ```json
-   "env": {
-         "ASPNETCORE_ENVIRONMENT": "HttpsDevelopment"
-   }
-   ```
-
-2. Next, export the SSL cert using the following command:
-
-    **Windows PowerShell**
-
-    ```powershell
-    dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
-    ```
-
-    **macOS/Linux terminal**
-
-    ```powershell
-    dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
-    ```
-
-3. Add the following in to `.devcontainer/devcontainer.json`:
-
-    ```json
-    "remoteEnv": {
-        "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
-        "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
-    }
-    ```
-
-4. Finally, make the certificate available in the container as follows:
-
-    **If using GitHub Codespaces and/or Dev Containers**
-
-    1. Start the container/codespace
-    2. Drag `~/.aspnet/https/aspnetapp.pfx` from your local machine into the root of the File Explorer in VS Code.
-    3. Open a terminal in VS Code and run:
-        ```bash
-        mkdir -p /home/vscode/.aspnet/https && mv aspnetapp.pfx /home/vscode/.aspnet/https
-        ```
-
-    **If using only Dev Containers with a local container**
-
-    Add the following to `.devcontainer/devcontainer.json`:
-
-    ```json
-    "mounts": [ "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind" ]
-    ```
-
-5. If you've already opened your folder in a container, rebuild the container using the **Dev Containers: Rebuild Container** command from the Command Palette (<kbd>F1</kbd>) so the settings take effect.
-
-Next time you debug using VS Code (<kbd>F5</kbd>), you'll be able to use HTTPS! Note that you will need to specifically navigate to `https://localhost:5001` to get the certificate to work (**not** `https://127.0.0.1:5001`).
-
 ## Contributing
 
-This project welcomes contributions and suggestions. Most contributions require you to agree to a
+This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.microsoft.com.
+the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
 
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
 provided by the bot. You will only need to do this once across all repos using our CLA.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-## License
+## Trademarks
 
-Copyright © Microsoft Corporation All rights reserved.<br />
-Licensed under the MIT License. See LICENSE in the project root for license information.
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
+trademarks or logos is subject to and must follow 
+[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
+Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
+Any use of third-party trademarks or logos are subject to those third-party's policies.
