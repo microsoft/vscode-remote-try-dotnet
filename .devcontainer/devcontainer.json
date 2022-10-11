@@ -1,7 +1,8 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/dotnet
+// https://github.com/devcontainers/templates/tree/main/src/dotnet
+
 {
-	"name": "C# (.NET)",
+	"name": "C# (.NET) Sample",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 
@@ -12,7 +13,15 @@
 			"NODE_VERSION": "none"
 		}
 	},
-
+	// Set *default* container specific settings.json values on container create.
+	"settings": {},
+	// Sets the ports that will be mapped to localhost or Codespaces.
+	"portsAttributes": {
+		"3000": {
+			"label": "Hello Remote World",
+			"onAutoForward": "notify"
+		}
+	},
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
