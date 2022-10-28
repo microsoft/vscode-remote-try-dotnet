@@ -1,29 +1,35 @@
-/*----------------------------------------------------------------------------------------
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License. See LICENSE in the project root for license information.
- *---------------------------------------------------------------------------------------*/
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
 
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
+// See if we keep this with HTTPS
+app.Urls.Add("http://localhost:3000");
 
-namespace aspnetapp
+app.MapGet("/", () => "Hello World!");
+
+app.MapGet("/{cityName}/weather", GetWeatherByCity);
+
+app.Run();
+
+
+Weather GetWeatherByCity(string cityName)
 {
-    public class Program
+    app.Logger.LogInformation($"Weather requested for {cityName}.");
+    var weather = new Weather(cityName);
+    return weather;
+}
+
+public record Weather
+{
+    public string City { get; set; }
+
+    public Weather(string city)
     {
-        public static void Main(string[] args)
-        {            
-            var host = Host.CreateDefaultBuilder()    
-                .ConfigureWebHostDefaults(webBuilder => { 
-                    webBuilder.Configure(app => { 
-                        app.UseHttpsRedirection()
-                            .Run(async context => {
-                                await context.Response.WriteAsync("Hello remote world from ASP.NET Core!");
-                            });
-                    });
-                });
-            host.Build().Run();
-        }
+        City = city;
+        Conditions = "Cloudy";
+        // Temperature here is in celsius degrees, hence the 0-40 range.
+        Temperature = new Random().Next(0,40).ToString();
     }
+
+    public string Conditions { get; set; }
+    public string Temperature { get; set; }
 }
