@@ -1,6 +1,6 @@
 # See here for image contents: https://github.com/devcontainers/images/blob/main/src/dotnet/.devcontainer/Dockerfile
 
-# [Choice] .NET version: 6.0, 3.1, 6.0-bullseye, 3.1-bullseye, 6.0-focal, 3.1-focal
+# [Choice] .NET version: 7.0, 7.0-bullseye-slim, 6.0, 3.1, 6.0-bullseye, 3.1-bullseye, 6.0-focal, 3.1-focal
 ARG VARIANT="7.0-bullseye-slim"
 FROM mcr.microsoft.com/devcontainers/dotnet:0-${VARIANT}
 
