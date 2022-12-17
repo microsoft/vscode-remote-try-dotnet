@@ -62,14 +62,14 @@ Some things to try:
    - Open `Program.cs`
    - Add a breakpoint (e.g. on line 16).
    - Press <kbd>F5</kbd> to launch the app in the container.
-   - Navigate to the weather endpoint, for example, [http://localhost:3000/paris/weather](http://localhost:3000/paris/weather).
+   - Navigate to the weather endpoint, for example, [http://localhost:5000/paris/weather](http://localhost:5000/paris/weather).
    - Once the breakpoint is hit, try hovering over variables, examining locals, and more.   
    - Continue (<kbd>F5</kbd>). You can connect to the server in the container by either: 
-      - Clicking on `Open in Browser` in the notification telling you: `Your service running on port 3000 is available`.
+      - Clicking on `Open in Browser` in the notification telling you: `Your service running on port 5000 is available`.
       - Clicking the globe icon in the 'Ports' view. The 'Ports' view gives you an organized table of your forwarded ports, and you can access it with the command **Ports: Focus on Ports View**.
-    - Notice port 3000 in the 'Ports' view is labeled "Hello Remote World." In `devcontainer.json`, you can set `"portsAttributes"`, such as a label for your forwarded ports and the action to be taken when the port is autoforwarded.
+    - Notice port 5000 in the 'Ports' view is labeled "Hello Remote World." In `devcontainer.json`, you can set `"portsAttributes"`, such as a label for your forwarded ports and the action to be taken when the port is autoforwarded.
 
-   > **Note:** In Dev Containers, you can access your app at `http://localhost:3000` in a local browser. But in a browser-based Codespace, you must click the link from the notification or the `Ports` view so that the service handles port forwarding in the browser and generates the correct URL.
+   > **Note:** In Dev Containers, you can access your app at `http://localhost:5000` in a local browser. But in a browser-based Codespace, you must click the link from the notification or the `Ports` view so that the service handles port forwarding in the browser and generates the correct URL.
 
 5. **Rebuild or update your container**
 
