@@ -19,7 +19,8 @@
 		}
 	},
 
-	// Sets the ports that will be mapped to localhost or Codespaces.
+	// Use 'portsAttributes' to set default properties for specific forwarded ports. 
+	// More info: https://containers.dev/implementors/json_reference/#port-attributes
 	"portsAttributes": {
 		"5000": {
 			"label": "Hello Remote World",
