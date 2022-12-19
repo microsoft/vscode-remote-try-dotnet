@@ -3,7 +3,7 @@
 [![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-dotnet)
 
 
-A **development container** is a running [Docker](https://www.docker.com) container with a well-defined tool/runtime stack and its prerequisites. You can try out development containers with **[GitHub Codespaces](https://github.com/features/codespaces)** or **[Visual Studio Code Dev Containers](https://aka.ms/vscode-remote/containers)**.
+A **development container** is a running container with a well-defined tool/runtime stack and its prerequisites. You can try out development containers with **[GitHub Codespaces](https://github.com/features/codespaces)** or **[Visual Studio Code Dev Containers](https://aka.ms/vscode-remote/containers)**.
 
 This is a sample project that lets you try out either option in a few easy steps. We have a variety of other [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-remote-try-&type=Repositories) sample projects, too.
 
@@ -13,8 +13,9 @@ This is a sample project that lets you try out either option in a few easy steps
 
 ### GitHub Codespaces
 Follow these steps to open this sample in a Codespace:
-1. Click the Code drop-down menu and select the **Open with Codespaces** option.
-1. Select **+ New codespace** at the bottom on the pane.
+1. Click the **Code** drop-down menu.
+2. Click on the **Codespaces** tab.
+3. Click **Create codespace on main** .
 
 For more info, check out the [GitHub documentation](https://docs.github.com/en/free-pro-team@latest/github/developing-online-with-codespaces/creating-a-codespace#creating-a-codespace).
 
@@ -44,8 +45,6 @@ Follow these steps to open this sample in a container using the VS Code Dev Cont
 
 Once you have this sample opened, you'll be able to work with it like you would locally.
 
-> **Note:** This container runs as a non-root user with sudo access by default. Comment out `"remoteUser": "vscode"` in `.devcontainer/devcontainer.json` if you'd prefer to run as root.
-
 Some things to try:
 
 1. **Restore Packages:** When notified by the C# extension to install packages, click Restore to trigger the process from inside the container! You can also execute `dotnet restore` command in a terminal.
@@ -53,19 +52,22 @@ Some things to try:
 2. **Edit:**
    - Open `Program.cs`
    - Try adding some code and check out the language features.
+   - Make a spelling mistake and notice it is detected. The [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension was automatically installed because it is referenced in `.devcontainer/devcontainer.json`.
+   - Also notice that the [C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) extension is installed. Tools are installed in the `mcr.microsoft.com/devcontainers/dotnet` image and Dev Container settings and metadata are automatically picked up from [image labels](https://containers.dev/implementors/reference/#labels).
+
 
 4. **Build, Run, and Debug:**
    - Open `Program.cs`
    - Add a breakpoint (e.g. on line 16).
    - Press <kbd>F5</kbd> to launch the app in the container.
-   - Navigate to the weather endpoint, for example, [http://localhost:3000/paris/weather](http://localhost:3000/paris/weather).
+   - Navigate to the weather endpoint, for example, [http://localhost:5000/paris/weather](http://localhost:5000/paris/weather).
    - Once the breakpoint is hit, try hovering over variables, examining locals, and more.   
    - Continue (<kbd>F5</kbd>). You can connect to the server in the container by either: 
-      - Clicking on `Open in Browser` in the notification telling you: `Your service running on port 3000 is available`.
+      - Clicking on `Open in Browser` in the notification telling you: `Your service running on port 5000 is available`.
       - Clicking the globe icon in the 'Ports' view. The 'Ports' view gives you an organized table of your forwarded ports, and you can access it with the command **Ports: Focus on Ports View**.
-    - Notice port 3000 in the 'Ports' view is labeled "Hello Remote World." In `devcontainer.json`, you can set `"portsAttributes"`, such as a label for your forwarded ports and the action to be taken when the port is autoforwarded.
+    - Notice port 5000 in the 'Ports' view is labeled "Hello Remote World." In `devcontainer.json`, you can set `"portsAttributes"`, such as a label for your forwarded ports and the action to be taken when the port is autoforwarded.
 
-   > **Note:** In Dev Containers, you can access your app at `http://localhost:3000` in a local browser. But in a browser-based Codespace, you must click the link from the notification or the `Ports` view so that the service handles port forwarding in the browser and generates the correct URL.
+   > **Note:** In Dev Containers, you can access your app at `http://localhost:5000` in a local browser. But in a browser-based Codespace, you must click the link from the notification or the `Ports` view so that the service handles port forwarding in the browser and generates the correct URL.
 
 5. **Rebuild or update your container**
 
@@ -75,6 +77,13 @@ Some things to try:
    
    - Open the `.devcontainer/devcontainer.json` file.
    - Modify the `"onAutoForward"` attribute in your `portsAttributes` from `"notify"` to `"openBrowser"`.
+   - Press <kbd>F1</kbd> and select the **Dev Containers: Rebuild Container** or **Codespaces: Rebuild Container** command so the modifications are picked up.
+
+5. **Install Node.js using a Dev Container Feature:**
+   - Press <kbd>F1</kbd> and select the **Dev Containers: Configure Container Features...** or **Codespaces: Configure Container Features...** command.
+   - Type "node" in the text box at the top.
+   - Check check box next to "Node.js (via nvm) and yarn" (published by devcontainers) 
+   - Click OK
    - Press <kbd>F1</kbd> and select the **Dev Containers: Rebuild Container** or **Codespaces: Rebuild Container** command so the modifications are picked up.
 
 ## Contributing

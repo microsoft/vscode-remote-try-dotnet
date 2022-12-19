@@ -1,8 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-// See if we keep this with HTTPS
-app.Urls.Add("http://localhost:3000");
+app.Urls.Add("http://localhost:5000");
 
 app.MapGet("/", () => "Hello World!");
 
