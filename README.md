@@ -1,3 +1,24 @@
+# Trying out https://github.com/cs-util-com/cscore in your browser
+
+The idea of this repository here is to allow you to run the https://github.com/cs-util-com/cscore library and experiment with the different features. 
+
+## How to get started:
+
+1. Open https://github.com/cs-util-com/cscore-playground (You probably already did this)
+2. Click "**Use this template**"
+3. Click "**Open in a codespace**"
+4. After the playground has fully loaded, go to the Program.cs class
+5. Edit the string in the `Log.d(..)` line to something else
+6. Press F5 to run the code
+
+
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+---
+---
+# The sections below can be ignored, they are the original readme to get started with .net in Codespaces (see https://github.com/microsoft/vscode-remote-try-dotnet)
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
 # Try Out Development Containers: .NET
 
 [![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-dotnet)
