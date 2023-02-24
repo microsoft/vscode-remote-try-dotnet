@@ -7,4 +7,9 @@
     <RootNamespace>vscode_remote_try_dotnet</RootNamespace>
   </PropertyGroup>
 
+  <!-- See https://github.com/cs-util-com/cscore#-getting-started -->
+  <ItemGroup>
+    <PackageReference Include="com.csutil.cscore" Version="*" />
+  </ItemGroup>
+
 </Project>
