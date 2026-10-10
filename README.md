@@ -43,6 +43,12 @@ Follow these steps to open this sample in a container using the VS Code Dev Cont
 
 ## Things to try
 
+### Toolchain
+
+This sample uses the .NET 10 SDK on Ubuntu 24.04 (Noble) and targets `net10.0`.
+Run `dotnet build` to compile the project, then `dotnet run` to start the sample.
+The debugger launch path also targets `net10.0`.
+
 Once you have this sample opened, you'll be able to work with it like you would locally.
 
 Some things to try:
