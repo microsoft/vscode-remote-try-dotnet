@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include<string.h>
+#define max_student 100
+#define max_length 50
+struct student{
+int id;
+char name[50];
+char subject[50];
+float marks;
+char department[50];
+};
+student students[MAX_Students];
+int student_count=0;
+void addstudent(){
+if(student_count>=MAX_Students){
+printf("Cannot add more students.It is full");
+return ;
+}
+Student newStudent;
+newStudent.id=student_count+1;
+printf("enter student id:");
+scanf("%d",&newStudent.id);
+printf("enter student name:");
+scanf("%s",newStudent.name);
+printf("enter subject:");
+scanf("%s",newStudent.subject);
+printf("enter student marks:");
+scanf("%d",&newStudent.marks);
+printf("enter student department:");
+scanf("%s",newStudent.department);
+students[student_count]=newStudent;
+student_count++;
+printf("Student added successfully");
+void displaystudents(){
+if(student_count==0){
+printf("No student found\n");
+return ;
+}
+printf("\nStudent records:\n");
+printf("Id\tName\tSubject\tMarks\tDepartment\t");
+for(int i=0;i<student_count;i++){
+printf("%d\t%s\t%s\t%d\t%s\t",students[i].id,students[i].name,students[i].subject,students[i].marks,students[i].department);
+return;
+}
+}
+void searchstudent(){
+int id;
+printf("enter student id:");
+scanf("%d",&id);
+for(int i=0;i<student_count;i++){
+if(students[i].id==id){
+printf("\nstudent found\n");
+printf("%d\t%s\t%s\t%d\t%s\t",students[i].id,students[i].name,students[i].subject,students[i].marks,students[i].department);
+return;
+}
+}
+}
+void updatestudent(){
+int id;
+printf("enter student id:");
+scanf("%d",&students[i].id);
+for(int i=0;i<student_count;i++){
+if(students[i].id==id){
+printf("enter new name:");
+scanf("%s",students[i].name);
+printf("enter new subject:");
+scanf("%s",students[i].subject);
+printf("enter new marks:");
+scanf("%d",&students[i].marks);
+printf("enter new department:");
+scanf("%s",students[i].department);
+return ;
+}
+}
+}
+int main(){
+int choice;
+while(1){
+printf("\n student record system\n");
+printf("ADD STUDENT \n");
+printf("SEARCH STUDENT]n");
+printf("UPDATE STUDENT\n");
+printf("EXIT\n");
+printf("enter your choice:");
+scanf("%d",&choice);
+switch(choice){
+case 1:
+addstudent();
+break;
+case 2:
+displaystudents();
+break;
+case 3:
+searchstudent();
+break;
+case 4:
+updatestudent();
+break;
+case 6:
+printf("exiting program\n");
+return 0;
+default:
+printf("invalid choice");
+}
+}
+return 0;
+}
